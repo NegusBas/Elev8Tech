@@ -1,0 +1,298 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark theme as default - with increased contrast */
+    --background: 222 18% 8%; /* #121418 - Darker background */
+    --foreground: 210 40% 98%; /* #f5f8ff - Light text */
+    --card: 220 18% 12%; /* #1a1d24 - Darker card background */
+    --card-foreground: 210 40% 98%; /* #f5f8ff - Light text */
+    --popover: 220 18% 12%; /* #1a1d24 - Darker popover background */
+    --popover-foreground: 210 40% 98%; /* #f5f8ff - Light text */
+    --primary: 217 91% 60%; /* #3563E9 - SpringHive blue */
+    --primary-foreground: 0 0% 100%; /* #ffffff - White text on primary */
+    --secondary: 215 25% 27%; /* #2e3a4f - Dark secondary */
+    --secondary-foreground: 210 40% 98%; /* #f5f8ff - Light text */
+    --muted: 217 19% 15%; /* #1e2231 - Darker muted background */
+    --muted-foreground: 215 20% 85%; /* #c9d1e3 - Even brighter muted text for better contrast */
+    --accent: 33 30% 60%; /* #B39B80 - Elev8Tech beige/tan accent */
+    --accent-foreground: 0 0% 100%; /* #ffffff - White text on accent */
+    --destructive: 0 84% 60%; /* #f74a4a - Red */
+    --destructive-foreground: 0 0% 100%; /* #ffffff - White text on destructive */
+    --border: 217 19% 20%; /* #252a3a - Darker border color */
+    --input: 217 19% 20%; /* #252a3a - Darker input background */
+    --ring: 217 91% 60%; /* #3563E9 - Ring color */
+    --radius: 0.5rem;
+
+    /* Theme variables - dark mode with increased contrast */
+    --theme-primary: #3563e9; /* SpringHive blue */
+    --theme-primary-dark: #2a50c4; /* Darker blue */
+    --theme-secondary: #f5f8ff; /* Light text */
+    --theme-accent: #b39b80; /* Elev8Tech beige/tan accent */
+    --theme-text: #ffffff; /* White text for better contrast */
+    --theme-text-light: #b6c1d8; /* Lighter text with better contrast */
+    --theme-background: #121418; /* Darker background */
+    --theme-card-bg: #1a1d24; /* Darker card background */
+    --theme-feature-icon-bg: #2a3a5a; /* Feature icon background */
+    --theme-divider-color: #2e3a4f; /* Divider color */
+    --theme-section-accent-bg: #151921; /* Darker section background */
+  }
+
+  .light {
+    --background: 0 0% 100%; /* #ffffff - White background */
+    --foreground: 222 84% 4.9%; /* #0f1729 - Dark text */
+    --card: 0 0% 100%; /* #ffffff - White card */
+    --card-foreground: 222 84% 4.9%; /* #0f1729 - Dark text */
+    --popover: 0 0% 100%; /* #ffffff - White popover */
+    --popover-foreground: 222 84% 4.9%; /* #0f1729 - Dark text */
+    --primary: 217 91% 56%; /* #3563E9 - SpringHive blue */
+    --primary-foreground: 210 40% 98%; /* #f5f8ff - Light text on primary */
+    --secondary: 0 0% 12%; /* #1E1E1E - Dark gray for headings */
+    --secondary-foreground: 210 40% 98%; /* #f5f8ff - Light text on secondary */
+    --muted: 210 40% 96.1%; /* #f1f5fb - Muted background */
+    --muted-foreground: 215 16% 47%; /* #6c7a94 - Muted text */
+    --accent: 33 30% 60%; /* #B39B80 - Elev8Tech beige/tan accent */
+    --accent-foreground: 210 40% 98%; /* #f5f8ff - Light text on accent */
+    --destructive: 0 84% 60%; /* #f74a4a - Red */
+    --destructive-foreground: 210 40% 98%; /* #f5f8ff - Light text on destructive */
+    --border: 214 32% 91%; /* #e1e7ef - Border color */
+    --input: 214 32% 91%; /* #e1e7ef - Input background */
+    --ring: 217 91% 56%; /* #3563E9 - Ring color */
+
+    /* Theme variables - light mode */
+    --theme-primary: #3563e9; /* SpringHive blue */
+    --theme-primary-dark: #2a50c4; /* Darker blue */
+    --theme-secondary: #1e1e1e; /* Dark text */
+    --theme-accent: #b39b80; /* Elev8Tech beige/tan accent */
+    --theme-text: #4f4f4f; /* Medium gray text */
+    --theme-text-light: #5e5e5e; /* Lighter text */
+    --theme-background: #ffffff; /* White background */
+    --theme-card-bg: #ffffff; /* Card background */
+    --theme-feature-icon-bg: #edf3ff; /* Feature icon background */
+    --theme-divider-color: #dce3f0; /* Divider color */
+    --theme-section-accent-bg: #f4f9ff; /* Section background */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold text-foreground;
+  }
+  p {
+    @apply text-muted-foreground;
+  }
+}
+
+@layer components {
+  /* Gradient backgrounds */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-primary-dark) 100%);
+  }
+
+  .bg-gradient-purple {
+    background: linear-gradient(135deg, #8a2be2 0%, #4a0080 100%);
+  }
+
+  .bg-gradient-springhive {
+    background: linear-gradient(135deg, #7e57c2 0%, #26a69a 100%);
+  }
+
+  /* SpringHive-inspired gradient for dark theme */
+  .bg-springhive-hero {
+    background: linear-gradient(135deg, #4527a0 0%, #00796b 100%);
+  }
+
+  /* Card styles */
+  .card-shadow {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card-shadow:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    transform: translateY(-5px);
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-md font-medium transition-all;
+  }
+
+  .btn-primary:hover {
+    @apply bg-primary/90;
+  }
+
+  .btn-outline {
+    @apply border border-primary text-primary px-6 py-3 rounded-md font-medium transition-all;
+  }
+
+  .btn-outline:hover {
+    @apply bg-primary/10;
+  }
+
+  .high-contrast-text {
+    color: var(--foreground);
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .high-contrast-text {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Section styles */
+  .section-dark {
+    background-color: var(--theme-section-accent-bg);
+  }
+
+  /* Feature icon styles */
+  .feature-icon-bg {
+    background-color: var(--theme-feature-icon-bg);
+    color: var(--theme-primary);
+    @apply rounded-full p-4 inline-flex items-center justify-center;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80;
+  }
+
+  /* Fixed header spacing */
+  .pt-header {
+    padding-top: 120px; /* Adjust based on your header height */
+  }
+
+  /* Transparent overlay for header */
+  .header-overlay {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    z-index: 10;
+  }
+}
+
+/* Circular icon */
+.circular-icon {
+  @apply relative inline-flex items-center justify-center rounded-full;
+}
+
+.circular-icon::before {
+  content: "";
+  @apply absolute inset-0 rounded-full bg-primary/20 -z-10;
+}
+
+.circular-icon::after {
+  content: "";
+  @apply absolute inset-0 rounded-full border border-primary/30 -z-10;
+}
+
+/* Theme-based styles */
+.theme-primary {
+  color: var(--theme-primary);
+}
+
+.theme-bg-primary {
+  background-color: var(--theme-primary);
+}
+
+.theme-border-primary {
+  border-color: var(--theme-primary);
+}
+
+/* Page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 400ms, transform 400ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Interactive elements */
+.interactive-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.interactive-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark theme specific styles */
+.dark-card {
+  @apply bg-card border-border rounded-lg p-6;
+}
+
+.dark-section {
+  @apply bg-muted py-16;
+}
+
+.dark-divider {
+  @apply border-border;
+}
+
+.dark-glow {
+  box-shadow: 0 0 15px rgba(53, 99, 233, 0.3);
+}
