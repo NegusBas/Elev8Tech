@@ -22,7 +22,7 @@ const team = [
     name: "Josiah Orozco",
     role: "Lead Developer",
     bio: "Josiah brings extensive full-stack development expertise, specializing in creating scalable web applications and mentoring junior developers.",
-    image: "/placeholder.svg?height=400&width=400",
+    image: "/images/josiah.jpg", // Updated to use the new image with simpler filename
     social: {
       linkedin: "#",
       github: "#",
@@ -73,6 +73,8 @@ export function AboutTeam() {
                     alt={member.name}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    unoptimized={true}
+                    priority={index === 0 || index === 1}
                   />
                 </div>
 
