@@ -1,15 +1,8 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
-import { Mail, MapPin, Phone, Send, AlertCircle, Check, Copy } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Mail, MapPin, Check, Copy, MessageSquare } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 const services = [
   "Web Development",
@@ -21,33 +14,7 @@ const services = [
 ]
 
 export default function ContactPageClient() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    service: "",
-    message: "",
-    subject: "Contact Form Submission",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [error, setError] = useState("")
-  const [showDirectContact, setShowDirectContact] = useState(false)
   const [copied, setCopied] = useState(false)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleServiceChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, service: value }))
-    setFormData((prev) => ({
-      ...prev,
-      subject: `Inquiry about ${value} Services`,
-    }))
-  }
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -56,93 +23,19 @@ export default function ContactPageClient() {
     })
   }
 
-  // This function creates a mailto link with the form data
+  // This function creates a mailto link with basic information
   const composeEmailLink = () => {
-    const subject = encodeURIComponent(
-      formData.service ? `Inquiry about ${formData.service} Services` : "Website Contact Form",
-    )
-
+    const subject = encodeURIComponent("Website Contact Form")
     const body = encodeURIComponent(`
 Hello Elev8Tech team,
 
-${formData.message}
-
-My contact information:
-Name: ${formData.name}
-Email: ${formData.email}
-${formData.phone ? `Phone: ${formData.phone}` : ""}
-${formData.company ? `Company: ${formData.company}` : ""}
-${formData.service ? `Service Interested In: ${formData.service}` : ""}
+I'm interested in discussing a potential project with you.
 
 Thank you,
-${formData.name}
-    `)
+[Your Name]
+  `)
 
     return `mailto:info@elev8tech.co?subject=${subject}&body=${body}`
-  }
-
-  // Handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setError("")
-    setShowDirectContact(false)
-
-    try {
-      // Format the message to include all relevant information
-      const formattedMessage = `
-Message: ${formData.message}
-
-Service Interested In: ${formData.service}
-Phone: ${formData.phone || "Not provided"}
-Company: ${formData.company || "Not provided"}
-    `
-
-      // Create the payload with all necessary information
-      const payload = {
-        ...formData,
-        message: formattedMessage,
-      }
-
-      console.log("Submitting form data...")
-
-      // Attempt to send the form data to the API
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      })
-
-      const data = await response.json()
-
-      if (data.success) {
-        // If successful, show success message and reset form
-        setIsSubmitted(true)
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          company: "",
-          service: "",
-          message: "",
-          subject: "Contact Form Submission",
-        })
-      } else {
-        // If there's an error, show error message and direct contact options
-        console.error("Form submission error:", data)
-        setError(data.message || "Something went wrong. Please try again later or contact us directly.")
-        setShowDirectContact(true)
-      }
-    } catch (err) {
-      // Handle any exceptions
-      console.error("Error submitting form:", err)
-      setError("Failed to send message. Please try contacting us directly via email or phone.")
-      setShowDirectContact(true)
-    } finally {
-      setIsSubmitting(false)
-    }
   }
 
   return (
@@ -164,7 +57,7 @@ Company: ${formData.company || "Not provided"}
         </div>
       </section>
 
-      {/* Contact Form Section */}
+      {/* Contact Information Section */}
       <section className="py-24 bg-gray-900">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -215,12 +108,12 @@ Company: ${formData.company || "Not provided"}
 
                 <div className="flex items-start">
                   <div className="mr-4 p-3 bg-primary/20 rounded-full">
-                    <Phone className="h-6 w-6 text-primary" />
+                    <MessageSquare className="h-6 w-6 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-white">Call Us</h3>
+                    <h3 className="text-lg font-semibold text-white">Text Us</h3>
                     <div className="flex items-center gap-2">
-                      <a href="tel:+16266202783" className="text-gray-300 hover:text-primary transition-colors">
+                      <a href="sms:+16266202783" className="text-gray-300 hover:text-primary transition-colors">
                         (626) 620-2783
                       </a>
                       <button
@@ -253,194 +146,39 @@ Company: ${formData.company || "Not provided"}
                   </li>
                 </ul>
               </div>
-
-              {/* Direct Contact Information - Shows when form fails */}
-              {(showDirectContact || error) && (
-                <div className="mt-8 p-6 bg-primary/10 border border-primary/20 rounded-lg">
-                  <div className="flex items-start mb-4">
-                    <AlertCircle className="h-6 w-6 text-primary mr-2 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="text-lg font-semibold text-white">Contact Us Directly</h3>
-                      <p className="text-gray-300 mb-4">
-                        Our form is experiencing technical difficulties. Please use one of these methods to contact us:
-                      </p>
-
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="font-medium text-white mb-2">Send us an email directly:</h4>
-                          <a
-                            href={composeEmailLink()}
-                            className="inline-flex items-center justify-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
-                          >
-                            <Mail className="h-4 w-4 mr-2" />
-                            Open Email Client
-                          </a>
-                        </div>
-
-                        <div>
-                          <h4 className="font-medium text-white mb-2">Call us:</h4>
-                          <a
-                            href="tel:+16266202783"
-                            className="inline-flex items-center justify-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
-                          >
-                            <Phone className="h-4 w-4 mr-2" />
-                            (626) 620-2783
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
 
-            {/* Contact Form */}
+            {/* Contact Form Placeholder */}
             <div>
               <Card className="border border-gray-700 bg-gray-800 shadow-lg">
                 <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold mb-6 text-white">Send Us a Message</h2>
+                  <h2 className="text-2xl font-bold mb-6 text-white">Ready to Get Started?</h2>
 
-                  {isSubmitted ? (
-                    <div className="text-center py-8">
-                      <div className="inline-flex items-center justify-center p-4 bg-green-900/50 text-green-400 rounded-full mb-4">
-                        <Send className="h-8 w-8" />
-                      </div>
-                      <h3 className="text-xl font-bold mb-2 text-white">Message Received!</h3>
-                      <p className="text-gray-300 mb-6">
-                        Thank you for reaching out. We'll get back to you as soon as possible.
-                      </p>
-                      <Button
-                        onClick={() => setIsSubmitted(false)}
-                        className="bg-primary hover:bg-primary/90 text-white"
-                      >
-                        Send Another Message
-                      </Button>
+                  <div className="text-center py-8">
+                    <div className="inline-flex items-center justify-center p-4 bg-primary/20 text-primary rounded-full mb-4">
+                      <Mail className="h-8 w-8" />
                     </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      {error && (
-                        <div className="p-4 bg-red-900/50 text-red-300 rounded-md flex items-start">
-                          <AlertCircle className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
-                          <div>
-                            <p className="font-medium">{error}</p>
-                            <p className="mt-2 text-sm">
-                              You can also email us directly at{" "}
-                              <a href="mailto:info@elev8tech.co" className="underline hover:text-red-200">
-                                info@elev8tech.co
-                              </a>
-                            </p>
-                          </div>
-                        </div>
-                      )}
+                    <h3 className="text-xl font-bold mb-2 text-white">Contact Us Today</h3>
+                    <p className="text-gray-300 mb-6">
+                      We're excited to hear about your project! Reach out to us directly via email or text, and we'll
+                      get back to you as soon as possible.
+                    </p>
+                    <a
+                      href={composeEmailLink()}
+                      className="inline-flex items-center justify-center w-full px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-md transition-colors"
+                    >
+                      <Mail className="mr-2 h-4 w-4" />
+                      Email Us Now
+                    </a>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="name" className="text-white">
-                            Full Name *
-                          </Label>
-                          <Input
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                            className="border-gray-700 bg-gray-700/50 text-white focus:border-primary focus:ring-primary"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="email" className="text-white">
-                            Email Address *
-                          </Label>
-                          <Input
-                            id="email"
-                            name="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            className="border-gray-700 bg-gray-700/50 text-white focus:border-primary focus:ring-primary"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="phone" className="text-white">
-                            Phone Number
-                          </Label>
-                          <Input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            className="border-gray-700 bg-gray-700/50 text-white focus:border-primary focus:ring-primary"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="company" className="text-white">
-                            Company Name
-                          </Label>
-                          <Input
-                            id="company"
-                            name="company"
-                            value={formData.company}
-                            onChange={handleChange}
-                            className="border-gray-700 bg-gray-700/50 text-white focus:border-primary focus:ring-primary"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label className="text-white">Service You're Interested In *</Label>
-                        <RadioGroup
-                          value={formData.service}
-                          onValueChange={handleServiceChange}
-                          className="grid grid-cols-1 md:grid-cols-2 gap-2"
-                        >
-                          {services.map((service) => (
-                            <div key={service} className="flex items-center space-x-2">
-                              <RadioGroupItem value={service} id={service.replace(/\s+/g, "-").toLowerCase()} />
-                              <Label htmlFor={service.replace(/\s+/g, "-").toLowerCase()} className="text-gray-300">
-                                {service}
-                              </Label>
-                            </div>
-                          ))}
-                        </RadioGroup>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="message" className="text-white">
-                          Your Message *
-                        </Label>
-                        <Textarea
-                          id="message"
-                          name="message"
-                          value={formData.message}
-                          onChange={handleChange}
-                          required
-                          rows={5}
-                          className="border-gray-700 bg-gray-700/50 text-white focus:border-primary focus:ring-primary"
-                        />
-                      </div>
-
-                      <div className="flex flex-col sm:flex-row gap-4">
-                        <Button
-                          type="submit"
-                          className="flex-1 bg-primary hover:bg-primary/90 text-white"
-                          disabled={isSubmitting}
-                        >
-                          {isSubmitting ? "Sending..." : "Send Message"}
-                        </Button>
-
-                        <Button
-                          type="button"
-                          className={`flex-1 ${error ? "bg-green-600 hover:bg-green-700" : "bg-gray-700 hover:bg-gray-600"} text-white`}
-                          onClick={() => (window.location.href = composeEmailLink())}
-                        >
-                          <Mail className="mr-2 h-4 w-4" />
-                          Email Directly
-                        </Button>
-                      </div>
-                    </form>
-                  )}
+                    <a
+                      href="sms:+16266202783"
+                      className="inline-flex items-center justify-center w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md transition-colors mt-4"
+                    >
+                      <MessageSquare className="mr-2 h-4 w-4" />
+                      Text (626) 620-2783
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </div>

@@ -16,11 +16,7 @@ const navigation = [
   { name: "Contact", href: "/contact" },
 ]
 
-const socialLinks = [
-  { name: "Facebook", href: "#", icon: "facebook" },
-  { name: "Pinterest", href: "#", icon: "pinterest" },
-  { name: "Instagram", href: "#", icon: "instagram" },
-]
+const socialLinks = [{ name: "Facebook", href: "#", icon: "facebook" }]
 
 export function AdaptiveHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -112,7 +108,7 @@ export function AdaptiveHeader() {
                 <Search className="h-5 w-5" />
               </button>
               <Button className="text-white rounded-md" style={{ backgroundColor: colors.accent }}>
-                Call Us: +1 (626) 620-2783
+                Text Us: +1 (626) 620-2783
               </Button>
             </div>
 
@@ -230,7 +226,7 @@ export function AdaptiveHeader() {
             </div>
             <div className="py-6">
               <Button className="w-full text-white rounded-md" style={{ backgroundColor: colors.accent }}>
-                Call Us: +1 (626) 620-2783
+                Text Us: +1 (626) 620-2783
               </Button>
               <div className="mt-6">
                 <a
