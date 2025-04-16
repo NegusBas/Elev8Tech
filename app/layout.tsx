@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { PageThemeProvider } from "@/components/page-theme-provider"
 import { AdaptiveHeader } from "@/components/adaptive-header"
 import { Footer } from "@/components/footer"
-import { FloatingActionButton } from "@/components/floating-action-button"
 import { PageTransition } from "@/components/page-transition"
 import { CursorFollower } from "@/components/cursor-follower"
 import { ScrollToTop } from "@/components/scroll-to-top"
@@ -45,7 +44,6 @@ export default function RootLayout({
             <AdaptiveHeader />
             <PageTransition>{children}</PageTransition>
             <Footer />
-            <FloatingActionButton />
           </PageThemeProvider>
         </ThemeProvider>
       </body>

@@ -84,28 +84,30 @@ export function AboutTeam() {
                 </p>
                 <p className="mb-6 text-foreground">{member.bio}</p>
 
-                <div className="flex justify-center space-x-4">
-                  <a
-                    href={member.social.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full p-2 transition-colors"
-                    style={{ backgroundColor: `${colors.primary}15`, color: colors.primary }}
-                    aria-label={`${member.name}'s LinkedIn`}
-                  >
-                    <Linkedin className="h-5 w-5" />
-                  </a>
-                  <a
-                    href={member.social.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full p-2 transition-colors"
-                    style={{ backgroundColor: `${colors.primary}15`, color: colors.primary }}
-                    aria-label={`${member.name}'s GitHub`}
-                  >
-                    <Github className="h-5 w-5" />
-                  </a>
-                </div>
+                {member.name === "Basleal Ayinalem" && (
+                  <div className="flex justify-center space-x-4">
+                    <a
+                      href={member.social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full p-2 transition-colors"
+                      style={{ backgroundColor: `${colors.primary}15`, color: colors.primary }}
+                      aria-label={`${member.name}'s LinkedIn`}
+                    >
+                      <Linkedin className="h-5 w-5" />
+                    </a>
+                    <a
+                      href={member.social.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full p-2 transition-colors"
+                      style={{ backgroundColor: `${colors.primary}15`, color: colors.primary }}
+                      aria-label={`${member.name}'s GitHub`}
+                    >
+                      <Github className="h-5 w-5" />
+                    </a>
+                  </div>
+                )}
               </div>
 
               <div className="h-1 w-full transition-all" style={{ backgroundColor: colors.primary }}></div>

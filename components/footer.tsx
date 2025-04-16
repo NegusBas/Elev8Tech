@@ -1,12 +1,12 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, MapPin, Phone } from "lucide-react"
+import { Mail, MapPin, Phone } from "lucide-react"
 
 export function Footer() {
   return (
     <footer className="text-white border-t border-border" style={{ backgroundColor: "#b79c87" }}>
       <div className="container mx-auto px-4 md:px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           <div>
             <Link href="/" className="inline-block mb-6">
               <Image
@@ -21,28 +21,6 @@ export function Footer() {
               Elevating businesses through innovative web and mobile solutions. We build digital experiences that drive
               growth.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-white/80 hover:text-white transition-colors">
-                <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
-              </a>
-              <a href="#" className="text-white/80 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </a>
-              <a href="#" className="text-white/80 hover:text-white transition-colors">
-                <Youtube className="h-5 w-5" />
-                <span className="sr-only">YouTube</span>
-              </a>
-              <a href="#" className="text-white/80 hover:text-white transition-colors">
-                <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
-              </a>
-              <a href="#" className="text-white/80 hover:text-white transition-colors">
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-            </div>
           </div>
 
           <div>
@@ -71,37 +49,6 @@ export function Footer() {
               <li>
                 <Link href="/contact" className="text-white/80 hover:text-white transition-colors">
                   Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Services</h3>
-            <ul className="space-y-4">
-              <li>
-                <Link href="/services/web-development" className="text-white/80 hover:text-white transition-colors">
-                  Web Development
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/mobile-apps" className="text-white/80 hover:text-white transition-colors">
-                  Mobile Apps
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/custom-software" className="text-white/80 hover:text-white transition-colors">
-                  Custom Software
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/ecommerce" className="text-white/80 hover:text-white transition-colors">
-                  E-commerce Solutions
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/ui-ux-design" className="text-white/80 hover:text-white transition-colors">
-                  UI/UX Design
                 </Link>
               </li>
             </ul>
