@@ -16,9 +16,7 @@ const navigation = [
   { name: "Contact", href: "/contact" },
 ]
 
-const socialLinks = [
-  { name: "Facebook", href: "https://www.facebook.com/profile.php?id=61575353187496", icon: "facebook" },
-]
+const socialLinks = [{ name: "Instagram", href: "https://www.instagram.com/elev8tech.co/", icon: "instagram" }]
 
 export function AdaptiveHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
